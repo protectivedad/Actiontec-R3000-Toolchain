@@ -12,7 +12,8 @@ export BUILD_DIR
 include $(BUILD_DIR)/make.common
 
 APP=uClibc
-LOC=https://github.com/protectivedad/Actiontec-R3000-uClibc.git
+LOC=https://github.com/protectivedad/uClibc
+BRANCH=Actiontec-R3000
 
 CONFIGURE_ARGS := \
 	ARCH=$(TARGET_ARCH) \
@@ -32,7 +33,7 @@ CONFIG_ID_FILE = $(CURR_DIR)/$(APP)-CONFIG_ID_$(TOOLCHAIN_PREFIX)_$(LINUX_VER_ST
 .PHONY: headers startfiles install install_utils clean distclean shell
 
 $(SOURCE_ID_FILE) :
-	-[ ! -d $(APP) ] && git clone --depth=1 $(LOC) $(APP) 1>$(SOURCE_ID_FILE) 2>&1
+	-[ ! -d $(APP) ] && git clone --depth=1 --branch=$(BRANCH) $(LOC) $(APP) 1>$(SOURCE_ID_FILE) 2>&1
 	@echo "$(APP) is cloned"
 
 $(CONFIG_ID_FILE) : $(SOURCE_ID_FILE)
@@ -52,7 +53,7 @@ install_utils:
 	$(MAKE) -C $(APP) $(CONFIGURE_ARGS_1) install_utils
 
 install_hostutils:
-	$(MAKE) -C $(APP) $(CONFIGURE_ARGS) install_hostutils
+	$(MAKE) -C $(APP) $(CONFIGURE_ARGS_1) install_hostutils
 
 clean:
 	git -C $(APP) clean -dXf

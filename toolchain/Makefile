@@ -27,7 +27,7 @@ libgcc: startfiles
 
 uclibc: libgcc
 	$(MAKE) -C uclibc
-	$(MAKE) -C uclibc install_utils
+	$(MAKE) -C uclibc install_hostutils
 
 final: uclibc
 	$(MAKE) -C gcc
