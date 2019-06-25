@@ -1,0 +1,8 @@
+/gcc-linaro/
+/build-gcc-linaro/
+/cloog/
+/gmp/
+/isl/
+/mpc/
+/mpfr/
+/gcc-linaro-*_ID_*
